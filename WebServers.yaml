@@ -1,0 +1,413 @@
+WebServers:
+- Nginx
+    - LB
+- Apache httpd
+
+AppServers:
+
+What is a Network?
+In information technology, a network is defined as the
+connection of at least two computer systems, either by a
+cable or a wireless connection.
+
+Remote Servers:
+Elastic Cloud Compute --> EC2 in AWS
+
+Connecting to a remote server:
+  SSH --> Secure Shell
+
+1. With a Key:
+ssh -i "key.pem" user@publicIP
+
+ssh -i webserverkey.pem ec2-user@18.224.165.109
+
+
+- ec2-user (redHat)
+- Ubuntu (ubuntu)
+- key (pair)
+Example:
+  ssh -i webserverkey.pem ubuntu@18.224.165.109
+
+2. With a password:
+
+ssh ubuntu@18.224.165.109
+
+Note: 
+Password Authentication is disabled by default.
+We need to enable it in order to login using a password.
+
+How to enable password Authentication:
+  sudo vi /etc/ssh/sshd_config "no" to "yes"
+- sudo vi /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+- Update PasswordAuthentication yes
+- Restart SSH -> sudo systemctl restart ssh
+
+Create a user and assign the user a password:
+  Commands:
+    Create a user:
+      sudo adduser <username>
+      sudo adduser roland
+
+    Assign the user a password:
+      sudo passwd <username> --> you will be prompted
+                                  to type the password
+                                  and repeat it.
+                                  The password is invisible.
+      sudo passwd roland
+
+Now login from anywhere using the password method.
+
+ssh roland@public IP  
+ssh roland@3.21.228.181
+
+How to know the public IP from the CLI:
+  curl ifconfig.me
+Command to know the private IP from the CLI:
+  hostname -i 
+
+
+WebServers:
+- Nginx     
+- Apache httpd
+
+Deployment Dirctory: 
+
+/var/www/html/
+PORT 80
+
+DevSecOps
+
+
+Installation:
+Nginx:
+1. RedHat:
+  sudo yum install nginx
+  sudo systemctl start nginx
+  sudo systemctl enable nginx
+  
+
+2. Ubuntu:
+  sudo apt install nginx -y
+  sudo systemctl start nginx
+  sudo systemctl enable nging
+
+curl command: client url --> test endpoints
+
+Apache httpd:
+  1. RedHat:
+  #! /bin/bash
+  sudo yum install httpd -y
+  sudo systemctl httpd
+  sudo systemctl start httpd
+  sudo systemctl enable httpd
+
+  2. Ubuntu:
+  sudo apt install httpd
+  sudo systemctl start httpd
+  sudo systemctl enable httpd
+
+
+  sudo = superdoer / admin
+
+
+free css  
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Index Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+        main {
+            padding: 1em;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>I am learning DevOps at TechLink Academy on Zoom</h1>
+    </header>
+    <main>
+        <h2>DevOps from Zero to Expert</h2>
+        <p> This is my First WebPage Deployment, Where I learnt how to deploy a static app on ec2 instance using Nginx. </p>
+        <p>For more information, visit www.techl.co</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 Ayafor Emmanuel</p>
+    </footer>
+</body>
+</html>
+
+
+How to Connect to a remote host:
+  SSH --> Secure Shell (Port 22)
+
+  LAN:
+    - IP: A logical address of a device in a network.
+    - SWITCH: Connects devices within the same network.
+    - ROUTER: A networking device that forwards data  
+              packets between different computer networks.
+    - SUBNET: Defines your local area network IP range.
+
+  WAN:
+    - FIREWALL: A set of passive rules that protect your
+                network from unauthorized access.
+    - PORT FORWARDING: Redirects a communication request
+                       from one address and port number
+                       combination to another while 
+                       packets are traversing a network 
+                       gateway such as a router.
+
+    - NAT GATEWAY: Network Address Translation is a 
+                   method of remapping an IP address 
+                   while they are in transit across a 
+                   traffic routing device.
+
+A subnet is like a network within a network.
+When you partition an IP network into smaller 
+segments, each with its own set of IP addresses, 
+these segments become subnets.
+
+Subnets are designed to achieve fast, efficient, 
+and resilient computer networks
+
+____________
+
+CLOUD COMPUTING:
+Cloud computing is the delivery of computing services 
+over the internet, also known as "the cloud". 
+
+These services include:
+ - Compute (servers), ec2.instances
+ - storage, s3
+ - databases, 
+ - networking, vpc
+ - software, 
+ - analytics, and intelligence.
+ - Etc.
+
+ Provider: AWS, GCP, Alibaba, Azure, etc 
+
+AWS Cloud
+=========
+VIRTUAL PRIVATE CLOUD (Virtual Data Center)
+
+1.VPC - Virtual Private Cloud: 
+
+Amazon Virtual Private Cloud (Amazon VPC) is a service 
+provided by Amazon Web Services (AWS) that allows you 
+to create isolated network environments for your AWS 
+resources. 
+
+Here are the key points about Amazon VPC:
+
+A VPC is like your private slice of the AWS network.
+It provides a logically isolated virtual network 
+where you can launch AWS resources.
+__________
+
+2. Internet Gateway:
+
+The Internet Gateway acts as a bridge between your 
+VPC and the internet.
+It enables communication between resources within 
+your VPC and external networks, including the public 
+internet. Both IPv4 and IPv6 traffic are supported
+
+__________
+
+3. Subnets:
+
+A subnet, also known as a subnetwork, is a logical 
+subdivision of a larger network.
+
+4. Route Tables:
+
+A routing table is like a distribution map for data 
+packets traveling over an Internet Protocol (IP) network.
+It is stored in a router or network host and lists 
+the routes to specific network destinations
+
+5. Routing:
+
+Routing is the process of selecting and defining paths 
+for IP-packet traffic within or between networks
+
+Routing ensures that data packets reach their intended 
+destinations efficiently.
+
+It involves determining the best path for data to travel 
+from its source to its destination.
+
+Routers play a crucial role in making these routing 
+decisions.
+
+6. Bastion Host / Jump Server:
+
+A bastion host (jums server) is an Amazon EC2 instance 
+that serves as a secure gateway, allowing authorized 
+users to access private instances within an Amazon 
+Virtual Private Cloud (VPC) environment.
+_____________________________________________________
+
+
+
+STEPS IN CREATING OUR VPC IN AWS.
+=================================
+
+1. Create a VPC - Virtual Private Cloud
+2. Internet Gateway
+3. Subnets
+4. Route tables
+5. Routing -path
+6. Provision resources (ec2.instance)
+7. Bastion Host / Jump Server
+8. VPC Peering
+
+_____________________________________________________
+
+How to Create a VPC in AWS:
+
+1. On AWS Console, search for VPC -> Click Create VPC
+-> give the VPC a name (example: "Spark-VPC")
+-> IP range(CIDR block) 12.0.0.0/16
+   (To calculate the number of IPs (www.cidr.xyz))
+   
+   *Click Create VPC.
+
+2. Create Internet Gateway
+   -> Internet Gateways (IG)
+   -> Name of IG e.g. "Spark-IGW"
+  *Click Create Internet Gateway  
+
+Check State: Detached
+
+We need to Associate the Internet Gateway to our VPC  
+Click on the Internet Gateway ID
+Actions: -> Attach to VPC 
+         -> Select Spark-VPC
+         -> Attach VPC.
+
+3. Create Subnets
+On VPC console, click on Subnets
+NB: We neet to create Subnets, 1 private and 1 Public
+  -> Create Subnets
+
+Public Subnet:
+  -> Select VPC | Spark-VPC
+  -> Name: spark-Subnet-Public-a
+  -> Availability Zone: Select thesame for both xa  
+  -> IPv4 cidr 12.0.1.0/24  (256)
+
+Private Subnet:
+  -> Select VPC | Spark-VPC
+  -> Name: spark-Subnet-Private-a
+  -> Availability Zone: Select thesame for both xa  
+  -> IPv4 cidr 12.0.2.0/24 (256)
+
+4. Route Table  
+   Create 2 route tables 
+   One for the spark-Subnet-Private-a &
+   one for the spark-Subnet-Public-a
+
+  On console, under VPC, click
+  -> Route Tables
+  -> Create route table
+  -> spark-RT-public
+  -> VPC: Spark-VPC
+  *Create Route Table 
+
+5. Provide Route:
+    -> Actions -> Edit Route
+    -> Add Route 0.0.0.0/0 i.e. from anywhere
+    -> Target: IGW- (spark-IGW) -> Save  
+
+  Associate to Publuc Subnet: On route table click:
+    Subnet Association: -> Edit Subnet Association 
+    Select the Public Subnet and Save Association. 
+
+
+  On console, under VPC, click
+  -> Route Tables
+  -> Create route table
+  -> spark-RT-private
+  -> VPC: Spark-VPC
+  *Create Route Table
+  
+Note:
+The Private Subnet doesn't need to be linked or 
+attached to the Internet Gateway because it shouldn't
+be accessed from the internet (external to the VPC)
+Consequently, no route will be created.
+
+However, we should associate the private route table 
+to the private subnet.
+
+ On the private route table, click on:
+  Edit Subnet Association:
+    Select the Private Subnet -> Save Association.
+
+6.  We can now provision resources in the various
+   subnets as per the use case. 
+   For resources that should not be publicly 
+   accessible like databases and other enterprise
+   applications, they will be provisioned in the
+   private subnet.
+
+   For other resources like web servers or end-user
+   applications, they will be deployed on servers
+   in the public subnet.
+
+7. Bastion Host | Jump Server.
+
+  A jump server is an intermediary server responsible 
+  for funneling traffic through firewalls using a 
+  supervised secure channel. It acts as a proxy server 
+  that has two network interface cards to connect to two 
+  networks.
+
+  Demo:
+    Create 2 ec2 intances;
+    1 in the public subnet (bastion host/jump server)
+    1 in the private subnet (e.g. database server)
+
+    The server in the private subnet will not have 
+    a public IP, as it will not be publicly 
+    accessible.
+
+    On the security group setting, allow traffic only  
+    from servers in the public subnet or only from the 
+    IP of the jumpServer.
+
+    NOTE:
+    =====
+    1. What is the maximum number of IP addresses in a 
+    VPC?
+    Answer: 65,536 i.e. up to /16.  
+
+    2. How many VPCs can an aws account create?
+    Answer: You can create up to 5 VPCs per AWS Region 
+            by default. 
